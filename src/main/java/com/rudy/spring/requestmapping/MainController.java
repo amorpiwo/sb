@@ -1,10 +1,10 @@
 package com.rudy.spring.requestmapping;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by rudnikp on 20/09/2017.
@@ -14,11 +14,11 @@ import org.springframework.http.MediaType;
 public class MainController {
 
     {
-        System.out.println("initialized");
+        System.out.println("MainController initialized");
     }
 
     @RequestMapping("/")
-    public @ResponseBody String home() {
+    public String home() {
         return "index";
     }
 
@@ -39,5 +39,6 @@ public class MainController {
     public @ResponseBody String handleThirdButton() {
         return "<h1>button three handled</h1>";
     }
+
 
 }

@@ -13,7 +13,6 @@
 
     <context:component-scan base-package="com.rudy.spring.requestmapping" />
 
-    <!--<mvc:view-controller path="/" view-name="index"/>-->
 
     <!-- Resolves Views Selected For Rendering by @Controllers to *.jsp Resources in the /WEB-INF/ Folder -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
