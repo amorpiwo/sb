@@ -1,10 +1,7 @@
 package com.rudy.spring.requestmapping;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by rudnikp on 20/09/2017.
@@ -19,26 +16,10 @@ public class MainController {
 
     @RequestMapping("/")
     public String home() {
-        return "index";
+        return "index.html";
     }
 
-    @RequestMapping("/one")
-    public @ResponseBody String handleOneButton() {
-        return "<h1>Button one handled</h1>";
-    }
 
-    // Handles POST Request If The Request Header Contains 'content-type=application/x-www-form-urlencoded'
-    @RequestMapping(value = "/two", method = RequestMethod.POST, headers = {"content-type=application/x-www-form-urlencoded"})
-    public @ResponseBody String handleSecondButton() {
-
-        return "<h1>Button two handled </h1>";
-    }
-
-    // Handles POST Request If The Request Content Type Is 'application/x-www-form-urlencoded'
-    @RequestMapping(value = "/three", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public @ResponseBody String handleThirdButton() {
-        return "<h1>button three handled</h1>";
-    }
 
 
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Sping MVC @RequestMapping Example</title>
+    <style type="text/css">
+		form {
+		    display: inline-block;
+		}
+</style>
+
+
+
+
+</head>
+
+<body>
+    <h2>Spring MVC @RequestMapping Example</h2>
+    <!-- Request One -->
+
+    <button id="ajaxButton" type="button">Make a request</button>
+
+	<form action="one">
+		<input type="submit" value="One">
+	</form>
+
+
+</body>
+
+<script>
+(function() {
+  var httpRequest;
+  document.getElementById("ajaxButton").addEventListener('click', makeRequest);
+
+  function makeRequest() {
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      alert('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+    httpRequest.onreadystatechange = alertContents;
+    httpRequest.open('GET', '/but');
+    httpRequest.send();
+  }
+
+  function alertContents() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        alert(httpRequest.responseText);
+      } else {
+        alert('There was a problem with the request.');
+      }
+    }
+  }
+})();
+</script>
+
+</html>
