@@ -79,6 +79,9 @@
                         <host>localhost</host>
                     </httpConnector>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <!-- Manual option allows to reload jetty on demand and not automatically
+                        In case of multiple changes it is really useful -->
+                    <reload>manual</reload>
                     <webApp>
                         <contextPath>/</contextPath>
                     </webApp>

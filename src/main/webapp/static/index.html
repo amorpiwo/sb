@@ -4,15 +4,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Sping MVC @RequestMapping Example</title>
-    <style type="text/css">
-		form {
-		    display: inline-block;
-		}
-</style>
-
-
-
-
+    <link rel="stylesheet" href="css/main.css" type="text/css"/>
+    <script src="js/main.js" type="text/javascript" ></script>
 </head>
 
 <body>
@@ -21,40 +14,16 @@
 
     <button id="ajaxButton" type="button">Make a request</button>
 
+    <span class="spanButton" id="clickMeButton">Click Me</span>
+
 	<form action="one">
 		<input type="submit" value="One">
 	</form>
-
-
 </body>
 
 <script>
-(function() {
-  var httpRequest;
-  document.getElementById("ajaxButton").addEventListener('click', makeRequest);
-
-  function makeRequest() {
-    httpRequest = new XMLHttpRequest();
-
-    if (!httpRequest) {
-      alert('Giving up :( Cannot create an XMLHTTP instance');
-      return false;
-    }
-    httpRequest.onreadystatechange = alertContents;
-    httpRequest.open('GET', '/but');
-    httpRequest.send();
-  }
-
-  function alertContents() {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-      if (httpRequest.status === 200) {
-        alert(httpRequest.responseText);
-      } else {
-        alert('There was a problem with the request.');
-      }
-    }
-  }
-})();
+    addAjaxHandlingToButton();
+    registerEvents();
 </script>
 
 </html>

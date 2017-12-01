@@ -16,4 +16,11 @@ public class FirstRestController {
         return "Ajax request handled";
     }
 
+    @RequestMapping("/clickMe")
+    @ResponseBody
+    public String hanldeClickMeButton() {
+        return "Greetings from rest response";
+    }
+
+
 }

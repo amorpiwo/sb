@@ -1,0 +1,20 @@
+body button, form {
+   display: inline;
+}
+
+.spanButton {
+    width: 40px;
+    padding: 2px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/*
+input, textarea, select, button {
+    display: inline;
+}
+
+form {
+    display: inline;
+}
+*/
