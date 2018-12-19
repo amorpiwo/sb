@@ -5,25 +5,26 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Sping MVC @RequestMapping Example</title>
     <link rel="stylesheet" href="css/main.css" type="text/css"/>
+    <script src="js/ajax.js" type="text/javascript" ></script>
     <script src="js/main.js" type="text/javascript" ></script>
+    <script src="js/dashboard.js" type="text/javascript" ></script>
 </head>
 
 <body>
-    <h2>Spring MVC @RequestMapping Example</h2>
-    <!-- Request One -->
-
-    <button id="ajaxButton" type="button">Make a request</button>
-
+    <h2>Words</h2>
+    <div id="errorArea"></div>
     <span class="spanButton" id="clickMeButton">Click Me</span>
 
-	<form action="one">
-		<input type="submit" value="One">
-	</form>
+
+    <div id="dashboard">
+
+    </div>
+
+
 </body>
 
 <script>
-    addAjaxHandlingToButton();
-    registerEvents();
+    dashboard.getWords();
 </script>
 
 </html>

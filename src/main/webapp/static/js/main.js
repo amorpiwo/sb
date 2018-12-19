@@ -1,29 +1,4 @@
-function addAjaxHandlingToButton() {
-  var httpRequest;
-  document.getElementById("ajaxButton").addEventListener('click', makeRequest);
-
-  function makeRequest() {
-    httpRequest = new XMLHttpRequest();
-
-    if (!httpRequest) {
-      alert('Giving up :( Cannot create an XMLHTTP instance');
-      return false;
-    }
-    httpRequest.onreadystatechange = alertContents;
-    httpRequest.open('GET', '/but');
-    httpRequest.send();
-  }
-
-  function alertContents() {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-      if (httpRequest.status === 200) {
-            alert(httpRequest.responseText);
-      } else {
-            alert('There was a problem with the request.');
-      }
-    }
-  }
-}
+"use strict";
 
 var indexController = (function(){
     var ajax = new XMLHttpRequest();
@@ -33,7 +8,7 @@ var indexController = (function(){
         console.log('inside handle ajax response');
         if (ajax.readyState === XMLHttpRequest.DONE) {
             if (ajax.status === 200) {
-                alert(clickMeButton.innerHTML);
+//                alert(clickMeButton.innerHTML);
                 clickMeButton.innerHTML =  clickMeButton.innerHTML + " " + ajax.responseText;
             } else {
                 alert('Error while handling ajax request ' + ajax.status);
@@ -49,6 +24,8 @@ var indexController = (function(){
         console.log('Inside handle click me');
         ajax.onreadystatechange = handleAjaxResponse;
         ajax.open('GET', '/clickMe');
+        ajax.setRequestHeader('Accept', "application/json");
+        ajax.setRequestHeader('Content-Type', 'application/json');
         ajax.send();
      }
 

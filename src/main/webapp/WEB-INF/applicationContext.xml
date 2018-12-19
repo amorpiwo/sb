@@ -11,9 +11,82 @@
                  http://www.springframework.org/schema/mvc
                  http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.rudy.spring.requestmapping" />
+    <context:component-scan base-package="com.rudy" />
 
     <mvc:resources mapping="/**" location="/static/" />
+    <!-- this is needed when mvc:resource is used which seems to turn off annotation-driven so it needs to be put here
+    explicitly -->
     <mvc:annotation-driven/>
+
+    <!-- Two beans related with JSON are used to serialize Java classes to JSON, when sending data in Ajax response -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    </bean>
+
+    <!-- hibernate -->
+<!--
+    <context:property-placeholder location="classpath:persistence-h2.properties" />
+-->
+
+
+    <!-- hibernate -->
+    <context:property-placeholder location="classpath:persistence-h2.properties" />
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.user}" />
+        <property name="password" value="${jdbc.pass}" />
+    </bean>
+
+    <!-- Hibernate 3 XML SessionFactory Bean definition-->
+    <bean id="hibernate5SessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+            <property name="dataSource" ref="dataSource" />
+            <property name="mappingResources">
+                <list>
+                    <value>card.hbm.xml</value>
+                </list>
+            </property>
+
+            <property name="hibernateProperties">
+                <props>
+                    <prop key="hibernate.dialect">
+                        ${hibernate.dialect}
+                    </prop>
+                </props>
+            </property>
+    </bean>
+
+    <bean name="cardDao" class="com.rudy.wordcards.dashboard.dao.CardDao">
+        <property name="sessionFactory" ref="hibernate5SessionFactory"/>
+    </bean>
+
+    <bean name="dashboardController" class="com.rudy.wordcards.dashboard.controller.DashboardController" >
+        <property name="cardDao" ref="cardDao"/>
+    </bean>
+
+    <!-- H2 beans to start and stop DB. Open HTTP and TCP server. -->
+    <!--<bean id = "org.h2.tools.ServerWEB"-->
+          <!--class="org.h2.tools.Server"-->
+          <!--factory-method="createWebServer"-->
+          <!--init-method="start"-->
+          <!--destroy-method="stop">-->
+        <!--<constructor-arg value="-webAllowOthers,-webPort,8092" />-->
+    <!--</bean>-->
+
+    <!--<bean id = "org.h2.tools.ServerTCP"-->
+        <!--class="org.h2.tools.Server"-->
+        <!--factory-method="createTcpServer"-->
+          <!--init-method="start"-->
+        <!--destroy-method="stop">-->
+        <!--<constructor-arg value="-tcpAllowOthers,-tcpPort,9092" />-->
+    <!--</bean>-->
 
 </beans>
