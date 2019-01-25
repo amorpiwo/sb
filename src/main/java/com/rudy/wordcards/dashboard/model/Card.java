@@ -9,7 +9,7 @@ public class Card {
 
     Card() {}
 
-    Card(String word) {
+    public Card(String word) {
         this.word = word;
     }
 

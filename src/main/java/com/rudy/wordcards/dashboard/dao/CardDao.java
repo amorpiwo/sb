@@ -1,10 +1,12 @@
 package com.rudy.wordcards.dashboard.dao;
 
 import com.rudy.wordcards.dashboard.model.Card;
+import jdk.internal.jline.internal.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -25,12 +27,25 @@ public class CardDao {
         Session session = this.sessionFactory.openSession();
 
         List<Card> personList = session.createQuery("from Card").list();
-        LOG.info("Person list is " + personList.size());
+        LOG.info("Person list size is " + personList.size());
 
         session.close();
         return personList;
     }
 
+    public void createWord(String word) {
+        Log.info("createWord -> creating word : " + word);
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
 
+        Card newCard = new Card(word);
+
+        session.save(newCard);
+
+        transaction.commit();
+        session.close();
+        Log.info("createWord -> word " + word + " created");
+
+    }
 
 }

@@ -1,3 +1,7 @@
+body {
+    background-color : #ffc266;
+}
+
 body button, form {
    display: inline;
 }
@@ -14,22 +18,52 @@ div#errorArea {
 }
 
 div#dashboard {
-    border-style: solid;
+    /*border-style: solid;*/
     width: 70%;
     margin: 5% 10% 5% 10%;
     display: inline-block;
+
+}
+
+:root {
+    --border-color: #ffa366;
 }
 
 .wordBox {
     width: 20%;
     height: 100px;
-    border-style: solid;
-    border-color: blue;
+    /*border-style: solid;*/
+    border-top: 3px solid var(--border-color);
+    border-left: 3px solid var(--border-color);
+    /*border-bottom: 2px solid var(--border-color);
+    border-right: 2px solid var(--border-color);*/
+    border-radius: 4px;
+    /*border-color: gray;*/
     margin: 10px 10px;
     float: left;
     display: inline;
+    padding-top: 3px;
+    padding-left: 5px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 2vw;
+    background-color: #f2f2f2;
 }
 
+button#addNewWordButton {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+h2#title {
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 3vw;
+}
 /*
 input, textarea, select, button {
     display: inline;

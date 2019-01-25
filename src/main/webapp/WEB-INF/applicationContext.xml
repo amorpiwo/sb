@@ -30,13 +30,7 @@
     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     </bean>
 
-    <!-- hibernate -->
-<!--
-    <context:property-placeholder location="classpath:persistence-h2.properties" />
--->
-
-
-    <!-- hibernate -->
+    <!-- hibernate, properties files needs to be placed in resources folder in order to be discovered -->
     <context:property-placeholder location="classpath:persistence-h2.properties" />
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

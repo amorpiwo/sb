@@ -4,31 +4,45 @@ var ajaxResponse;
 
 var dashboard = (function(){
 
-    var url = "/getUserDashboard";
+    var getUserDashboardUrl = "/getUserDashboard";
+    var createNewWordForUser = "/createNewCard";
     var method = 'POST';
 
-    function fillDashboard(e) {
-        var request = e.target;
-        if (request.readyState === XMLHttpRequest.DONE) {
-           if (request.status === 200) {
-                ajaxResponse = request.response;
 
-                var text = '';
-                ajaxResponse.forEach(function(entry) {
-                    text += '<div class="wordBox">' + entry.word + '</div>';
-                });
+    function createElement(elementName) {
+        return document.createElement(elementName);
+    }
 
-                document.getElementById('dashboard').innerHTML = text;
+    function createTextElement(elementName) {
+            return document.createTextNode(elementName);
+    }
 
-           } else {
-              alert("Problem with handling request in dashboard handler " + ajax.status);
-           }
-        }
+    function renderDashboard(response) {
+        var text = '';
+        var dashboard = document.getElementById('dashboard');
+
+        response.forEach(function(entry) {
+                 var divNode = createElement("div");
+                 divNode.className = "wordBox";
+                 var textNode = createTextElement(entry.word);
+
+                 divNode.appendChild(textNode);
+                 dashboard.appendChild(divNode);
+        });
+
+    }
+
+    function addNewWord(response) {
+        var dashboard = document.getElementById('dashboard');
     }
 
     return {
         getWords : function () {
-            ajax.sendRequest(url, method, fillDashboard);
+            ajax.sendRequest(getUserDashboardUrl, method, renderDashboard);
+        },
+
+        createWord : function(word) {
+            ajax.sendRequest(createNewWordForUser, method, addNewWord);
         }
     }
 
