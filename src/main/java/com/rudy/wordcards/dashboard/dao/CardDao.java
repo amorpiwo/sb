@@ -1,7 +1,6 @@
 package com.rudy.wordcards.dashboard.dao;
 
 import com.rudy.wordcards.dashboard.model.Card;
-import jdk.internal.jline.internal.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -34,7 +33,7 @@ public class CardDao {
     }
 
     public void createWord(String word) {
-        Log.info("createWord -> creating word : " + word);
+        LOG.info("createWord -> creating word : " + word);
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -44,7 +43,7 @@ public class CardDao {
 
         transaction.commit();
         session.close();
-        Log.info("createWord -> word " + word + " created");
+        LOG.info("createWord -> word " + word + " created");
 
     }
 

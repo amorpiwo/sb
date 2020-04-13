@@ -1,13 +1,17 @@
 "use strict";
 
-var ajaxResponse;
+const dashboard = (() => {
 
-var dashboard = (function(){
 
     var getUserDashboardUrl = "/getUserDashboard";
     var createNewWordForUser = "/createNewCard";
-    var method = 'POST';
 
+    function createElementWithTextNode(elementName, text) {
+        var element = createElement(elementName);
+        var textElement = createTextElement(text);
+        element.appendChild(textElement);
+        return element;
+    }
 
     function createElement(elementName) {
         return document.createElement(elementName);
@@ -19,32 +23,41 @@ var dashboard = (function(){
 
     function renderDashboard(response) {
         var text = '';
-        var dashboard = document.getElementById('dashboard');
-
-        response.forEach(function(entry) {
-                 var divNode = createElement("div");
+        const dashboard = document.getElementById('dashboard');
+        response.forEach(entry =>  {
+                 var divNode = createElementWithTextNode("div", entry.word);
                  divNode.className = "wordBox";
-                 var textNode = createTextElement(entry.word);
-
-                 divNode.appendChild(textNode);
                  dashboard.appendChild(divNode);
         });
-
     }
 
-    function addNewWord(response) {
-        var dashboard = document.getElementById('dashboard');
+    function clickAddNewWord() {
+         var addWordElement = document.getElementById('addWord').style.visibility='visible';
+    }
+
+    const clearDashboard = (dashboard) => {
+        dashboard.childNodes.forEach(child => child.remove())
+    }
+
+    const rerenderDashBoard = () => {
+        clearDashboard(document.getElementById('dashboard'))
+        ajax.get(getUserDashboardUrl, renderDashboard);
     }
 
     return {
-        getWords : function () {
-            ajax.sendRequest(getUserDashboardUrl, method, renderDashboard);
+        getWords: () => {
+            ajax.get(getUserDashboardUrl, renderDashboard);
         },
 
-        createWord : function(word) {
-            ajax.sendRequest(createNewWordForUser, method, addNewWord);
+        createWord: () => {
+            const value = document.getElementById('addNewWordInput').value || ''
+            ajax.post(createNewWordForUser, rerenderDashBoard, JSON.stringify({value}));
+        },
+
+        clickAddNewWord : function() {
+            clickAddNewWord();
         }
     }
 
 
-}());
+})();

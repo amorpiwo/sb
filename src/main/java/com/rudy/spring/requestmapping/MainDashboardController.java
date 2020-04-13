@@ -28,7 +28,8 @@ public class MainDashboardController {
 
     //with jackson on board one only need to define getters and their will be used to generate JSON
     //now one can return Box in REST service and it will be automatically translated to JSON
-    //message converter needs to be registered in applicationContext
+    //message converter needs to be registered in applicationContext ?? - not really, there is content negotiation
+    // done in Sptring, so it checks ContentType header to figure out what type of message it really is
     static class Box {
         private String message = "some message";
 
@@ -42,32 +43,5 @@ public class MainDashboardController {
         }
     }
 
-    void search () {
-        Stream str;
-        String prefix = "\\.\\\\tkIS-Win2012-x64\\.part";
-        String suffix = "\\.rar";
-        Supplier<Stream<Path>> supp = () -> {
-            try {
-                return Files.list(Paths.get("."));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        };
-        int lastPathNumber = 0;
 
-        Iterator<Path> pathI = supp.get().iterator();
-        while (pathI.hasNext()) {
-            String currentPath = pathI.next().toString();
-            currentPath = currentPath.replaceAll(prefix, "");
-            currentPath = currentPath.replaceAll(suffix, "");
-            int currentNumber = Integer.parseInt(currentPath);
-            if (pathI.hasNext()) {
-                if (lastPathNumber + 1 != currentNumber) {
-                    System.out.println("Missing module + " + (lastPathNumber + 1));
-                }
-            }
-            lastPathNumber = currentNumber;
-
-        }
-    }
 }

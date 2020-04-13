@@ -18,17 +18,19 @@
     explicitly -->
     <mvc:annotation-driven/>
 
-    <!-- Two beans related with JSON are used to serialize Java classes to JSON, when sending data in Ajax response -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="jsonMessageConverter"/>
-            </list>
-        </property>
-    </bean>
+    <!-- This seems to be not needed, looks like Spring use some default converters and produces JSON responses !! -->
 
-    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-    </bean>
+    <!-- Two beans related with JSON are used to serialize Java classes to JSON, when sending data in Ajax response -->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<ref bean="jsonMessageConverter"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+    <!--</bean>-->
 
     <!-- hibernate, properties files needs to be placed in resources folder in order to be discovered -->
     <context:property-placeholder location="classpath:persistence-h2.properties" />
@@ -75,12 +77,12 @@
         <!--<constructor-arg value="-webAllowOthers,-webPort,8092" />-->
     <!--</bean>-->
 
-    <!--<bean id = "org.h2.tools.ServerTCP"-->
-        <!--class="org.h2.tools.Server"-->
-        <!--factory-method="createTcpServer"-->
+    <!--<bean id="org.h2.tools.Server"-->
+          <!--class="org.h2.tools.Server"-->
+          <!--factory-method="createTcpServer"-->
           <!--init-method="start"-->
-        <!--destroy-method="stop">-->
-        <!--<constructor-arg value="-tcpAllowOthers,-tcpPort,9092" />-->
+          <!--destroy-method="stop">-->
+        <!--<constructor-arg value="-tcp,-tcpAllowOthers,-ifNotExists,-tcpPort,9092" />-->
     <!--</bean>-->
 
 </beans>

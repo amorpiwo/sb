@@ -17,7 +17,7 @@ div#errorArea {
     color: red;
 }
 
-div#dashboard {
+.dashboard {
     /*border-style: solid;*/
     width: 70%;
     margin: 5% 10% 5% 10%;
@@ -54,11 +54,26 @@ button#addNewWordButton {
     background-color: #4CAF50;
     border: none;
     color: white;
-    padding: 15px 25px;
+    padding: 15px 20px;
     text-align: center;
-    font-size: 16px;
+    font-size: 1vw;
     cursor: pointer;
+    display: inline;
+    float: left;
+    width: 10vw;
+    margin-right: 10px
 }
+
+.addWord {
+    margin-left: 5em;
+    clear: right;
+    width: 75%;
+    display: block;
+    font-size: 1vw;
+    padding: 13px;
+    visibility: hidden;
+}
+
 h2#title {
     margin-right: auto;
     margin-left: auto;

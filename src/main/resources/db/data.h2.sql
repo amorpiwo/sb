@@ -4,4 +4,5 @@ INSERT INTO CARD(word) VALUES('Hello');
 INSERT INTO CARD(word) VALUES('World');
 INSERT INTO CARD(word) VALUES('And');
 INSERT INTO CARD(word) VALUES('good day');
+INSERT INTO CARD(word) VALUES('extraordinary');
 

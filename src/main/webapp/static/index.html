@@ -6,7 +6,6 @@
     <title>Sping MVC @RequestMapping Example</title>
     <link rel="stylesheet" href="css/main.css" type="text/css"/>
     <script src="js/ajax.js" type="text/javascript" ></script>
-    <script src="js/main.js" type="text/javascript" ></script>
     <script src="js/dashboard.js" type="text/javascript" ></script>
 </head>
 
@@ -15,8 +14,14 @@
         <h2 id="title">Words</h2>
         <div id="errorArea"></div>
 
-        <div id="dashboard">
-            <button id="addNewWordButton">Add New Word</button>
+        <div id="dashboard" class="dashboard">
+            <div>
+                <button id="addNewWordButton" onclick="dashboard.clickAddNewWord()">Add New Word</button>
+                <div id="addWord" class="addWord">
+                    <input id="addNewWordInput" />
+                    <button id="addNewWord" onClick="dashboard.createWord()">Add</button>
+                </div>
+            </div>
 
         </div>
 

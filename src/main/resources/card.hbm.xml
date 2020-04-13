@@ -11,7 +11,8 @@
         </meta>
 
         <id name ="id" type="big_integer" column="ID">
-            <generator class="sequence"/>
+            <!-- This seems to be old -->
+            <generator class="identity"/>
         </id>
 
         <property name = "word" column = "WORD" type = "string"/>
