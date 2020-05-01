@@ -1,6 +1,7 @@
 package com.rudy.wordcards.dashboard.dao;
 
 import com.rudy.wordcards.dashboard.model.Card;
+import com.rudy.wordcards.dashboard.model.Word;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -22,7 +23,6 @@ public class CardDao {
 
     @SuppressWarnings("unchecked")
     public List<Card> list() {
-        LOG.info("Session is " + sessionFactory);
         Session session = this.sessionFactory.openSession();
 
         List<Card> personList = session.createQuery("from Card").list();
@@ -32,7 +32,7 @@ public class CardDao {
         return personList;
     }
 
-    public void createWord(String word) {
+    public void createWord(Word word) {
         LOG.info("createWord -> creating word : " + word);
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();

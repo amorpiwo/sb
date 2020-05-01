@@ -1,16 +1,19 @@
 package com.rudy.wordcards.dashboard.model;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 
 public class Card {
 
     private BigInteger id;
     private String word;
+    private LocalDate lastViewed;
 
     Card() {}
 
-    public Card(String word) {
-        this.word = word;
+    public Card(Word word) {
+        this.word = word.getValue();
+        this.lastViewed = word.getLastViewed();
     }
 
     public String getWord() {
@@ -27,5 +30,13 @@ public class Card {
 
     public void setWord(String word) {
         this.word = word;
+    }
+
+    public LocalDate getLastViewed() {
+        return lastViewed;
+    }
+
+    public void setLastViewed(LocalDate lastViewed) {
+        this.lastViewed = lastViewed;
     }
 }

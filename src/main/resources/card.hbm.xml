@@ -15,7 +15,8 @@
             <generator class="identity"/>
         </id>
 
-        <property name = "word" column = "WORD" type = "string"/>
+        <property name="word" column="WORD" type="string"/>
+        <property name="lastViewed" column="LAST_VIEWED" type="LocalDate"/>
 
     </class>
 </hibernate-mapping>

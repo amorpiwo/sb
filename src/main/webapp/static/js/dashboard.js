@@ -2,9 +2,7 @@
 
 const dashboard = (() => {
 
-
-    var getUserDashboardUrl = "/getUserDashboard";
-    var createNewWordForUser = "/createNewCard";
+    var wordsUrl = "/words"
 
     function createElementWithTextNode(elementName, text) {
         var element = createElement(elementName);
@@ -25,7 +23,7 @@ const dashboard = (() => {
         var text = '';
         const dashboard = document.getElementById('dashboard');
         response.forEach(entry =>  {
-                 var divNode = createElementWithTextNode("div", entry.word);
+                 var divNode = createElementWithTextNode("div", entry.word + ' ' + entry.lastViewed);
                  divNode.className = "wordBox";
                  dashboard.appendChild(divNode);
         });
@@ -41,20 +39,31 @@ const dashboard = (() => {
 
     const rerenderDashBoard = () => {
         clearDashboard(document.getElementById('dashboard'))
-        ajax.get(getUserDashboardUrl, renderDashboard);
+        ajax.get(wordsUrl, renderDashboard);
     }
 
     return {
         getWords: () => {
-            ajax.get(getUserDashboardUrl, renderDashboard);
+            ajax.get(wordsUrl, renderDashboard);
         },
 
         createWord: () => {
             const value = document.getElementById('addNewWordInput').value || ''
-            ajax.post(createNewWordForUser, rerenderDashBoard, JSON.stringify({value}));
-        },
+            ajax.googleSend(value, response => {
+                 const translation = response.data.translations[0].translatedText
+                 ajax.post(wordsUrl, rerenderDashBoard, JSON.stringify({
+                    "value" : value + " : " + translation,
+                    "lastViewed" : new Date().toJSON()
+                    }))
+            })
 
-        clickAddNewWord : function() {
+
+        },
+        getTranslation: () => {
+            const value = document.getElementById('addNewWordInput').value || ''
+            ajax.googleSend(value)
+        },
+        clickAddNewWord: () => {
             clickAddNewWord();
         }
     }
